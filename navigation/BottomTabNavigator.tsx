@@ -14,6 +14,7 @@ import EventsScreen from "../screens/EventsScreen";
 import NewsScreen from "../screens/NewsScreen";
 import NoticesScreen from "../screens/NoticesScreen";
 import { BottomTabParamList, TabParamList } from "../types";
+import LottieView from "lottie-react-native";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

@@ -13,7 +13,6 @@ import * as React from "react";
 import { ColorSchemeName } from "react-native";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
-import WelcomeScreen from "../screens/WelcomeScreen";
 import { RootStackParamList } from "../types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -26,7 +25,7 @@ export default function Navigation({
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === colorScheme ? DarkTheme : DefaultTheme}
+      // theme={colorScheme === colorScheme ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
     </NavigationContainer>
@@ -39,19 +38,15 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator
-      initialRouteName="Welcome"
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
         options={{
           headerShown: true,
-          title: "AMU CALENDAR",
+          title: "CSS AMU",
           headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "maroon" },
+          headerStyle: { backgroundColor: "cyan" },
           headerTitleStyle: { fontWeight: "bold", color: "white" },
         }}
       />
