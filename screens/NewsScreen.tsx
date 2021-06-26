@@ -11,11 +11,11 @@ import { Text, View } from "../components/Themed";
 import { News } from "../types";
 
 export default function NewsScreen() {
-  const [newsData, setNewsData] = React.useState<News>();
+  const [newsData, setNewsData] = React.useState();
 
   React.useEffect(() => {
     axios
-      .get("https://api.amu.ac.in/api/v1/amu-news?lang=en&year=2012&month=10")
+      .get("https://api.amu.ac.in/api/v1/amu-news?lang=en&year=2021&month=06")
       .then((res) => setNewsData(res.data.data))
       .catch((err) => alert(err));
   }, []);
@@ -26,31 +26,17 @@ export default function NewsScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>News</Text>
       <FlatList
-        data={newsData?.data}
+        data={newsData}
         keyExtractor={(title) => title.id.toString()}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
           <View
             key={index}
-            style={{
-              backgroundColor: "maroon",
-              margin: 20,
-              marginBottom: 20,
-              borderRadius: 15,
-              padding: 10,
-              width: window.width / 1.2,
-              height: window.height / 4,
-            }}
+            style={styles.renderView}
+            lightColor={"cyan"}
+            darkColor={"cyan"}
           >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 16,
-                textAlign: "center",
-                color: "white",
-              }}
-            >
-              {item.title}
-            </Text>
+            <Text style={styles.renderText}>{item.title}</Text>
             <Text style={{ color: "white" }}>{item.description}</Text>
           </View>
         )}
@@ -64,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     // justifyContent: "center",
-    padding: 20,
+    padding: 6,
   },
   title: {
     fontSize: 20,
@@ -74,6 +60,19 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  renderText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+    color: "white",
+  },
+  renderView: {
+    margin: 20,
+    marginBottom: 20,
+    borderRadius: 15,
+    padding: 10,
+    flex: 1,
   },
 });
 
