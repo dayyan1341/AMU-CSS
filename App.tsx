@@ -7,6 +7,8 @@ import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import NewsScreen from "./screens/NewsScreen";
+import EventsScreen from "./screens/EventsScreen";
+import NoticesScreen from "./screens/NoticesScreen";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,6 +20,9 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <Navigation colorScheme={colorScheme} />
+        {/* <NewsScreen /> */}
+        {/* <EventsScreen /> */}
+        {/* <NoticesScreen /> */}
         <StatusBar />
       </SafeAreaProvider>
     );

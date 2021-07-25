@@ -1,13 +1,9 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  FlatList,
-  useWindowDimensions,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, FlatList, useWindowDimensions } from "react-native";
 import axios from "axios";
 
-import { Text, View } from "../components/Themed";
+import { Text, View, Card } from "../components/Themed";
+import Colors from "../constants/Colors";
 import { News } from "../types";
 
 export default function NewsScreen() {
@@ -30,15 +26,10 @@ export default function NewsScreen() {
         keyExtractor={(title) => title.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
-          <View
-            key={index}
-            style={styles.renderView}
-            lightColor={"cyan"}
-            darkColor={"cyan"}
-          >
+          <Card key={index} style={styles.renderView}>
             <Text style={styles.renderText}>{item.title}</Text>
             <Text style={{ color: "white" }}>{item.description}</Text>
-          </View>
+          </Card>
         )}
       />
     </View>

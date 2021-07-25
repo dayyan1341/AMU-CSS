@@ -2,7 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { Alert, StyleSheet, FlatList } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import { Text, View, Card } from "../components/Themed";
 
 export default function EventsScreen() {
   const [eventData, setEventData] = React.useState();
@@ -16,7 +16,6 @@ export default function EventsScreen() {
       .catch((err) => alert(err));
   }, []);
 
-  console.log(eventData);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Events</Text>
@@ -24,9 +23,9 @@ export default function EventsScreen() {
         data={eventData}
         keyExtractor={(item) => item.file}
         renderItem={({ item, index }) => (
-          <View key={index} style={styles.renderView} darkColor={"cyan"}>
+          <Card key={index} style={styles.renderView}>
             <Text style={styles.renderText}>{item.title}</Text>
-          </View>
+          </Card>
         )}
       />
     </View>

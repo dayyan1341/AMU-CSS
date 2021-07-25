@@ -11,6 +11,8 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
+import { View } from "../components/Themed";
+import Colors from "../constants/Colors";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
@@ -46,8 +48,11 @@ function RootNavigator() {
           headerShown: true,
           title: "CSS AMU",
           headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "cyan" },
+          headerStyle: { backgroundColor: Colors.backgroundTitle },
           headerTitleStyle: { fontWeight: "bold", color: "white" },
+          // headerBackground = () => {
+          //   <View darkColor={"white"} />;
+          // },
         }}
       />
       <Stack.Screen

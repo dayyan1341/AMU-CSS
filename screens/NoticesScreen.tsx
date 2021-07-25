@@ -6,17 +6,21 @@ import {
   StyleSheet,
   useWindowDimensions,
   FlatList,
+  Linking,
+  Button,
+  Pressable,
 } from "react-native";
 import { withRepeat } from "react-native-reanimated";
 
-import { Text, View } from "../components/Themed";
+import { Text, View, Card } from "../components/Themed";
+import Colors from "../constants/Colors";
 import { Notices } from "../types";
 
 export default function NoticesScreen() {
   const window = useWindowDimensions();
 
   const [noticeData, setNoticeData] = React.useState<Notices>();
-  const [refreshState, setRefreshState] = React.useState(true);
+  const [refreshState, setRefreshState] = React.useState(false);
   const [page, setPage] = React.useState(1);
 
   const fetchData = () => {
@@ -28,15 +32,15 @@ export default function NoticesScreen() {
       })
       .then((res) => {
         setNoticeData(res.data.data);
-        setRefreshState(false);
-        setPage(page + 1);
+        // setRefreshState(false);
+        // setPage(page + 1);
       })
       .catch((err) => console.log(err));
   };
-  console.log(page);
 
   React.useEffect(fetchData, []);
 
+  //https://adminbeta.amu.ac.in/storage/{item.file}
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Notices</Text>
@@ -51,17 +55,22 @@ export default function NoticesScreen() {
           fetchData();
         }}
         renderItem={({ item, index }) => (
-          <View
-            lightColor={"cyan"}
-            darkColor={"cyan"}
-            key={index}
-            style={styles.renderView}
-          >
+          <Card key={index} style={styles.renderView}>
             <Text style={styles.renderText}>{item.title}</Text>
-            <Text style={{ color: "white" }}>
-              https://adminbeta.amu.ac.in/api/v1/recent-notice/{item.file}
-            </Text>
-          </View>
+            <Pressable
+              android_ripple={{ color: "#eee" }}
+              style={styles.renderButton}
+              onPress={() =>
+                Linking.openURL(
+                  `https://adminbeta.amu.ac.in/storage/${item.file}`
+                )
+              }
+            >
+              <Text style={{ color: "white", textAlign: "center" }}>
+                OPEN PDF
+              </Text>
+            </Pressable>
+          </Card>
         )}
       />
     </View>
@@ -96,5 +105,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 10,
     flex: 1,
+  },
+  renderButton: {
+    marginTop: 15,
+    marginBottom: 10,
+    marginHorizontal: 30,
+    padding: 10,
+    borderWidth: 2,
+    borderColor: "white",
   },
 });
