@@ -13,6 +13,7 @@ import * as React from "react";
 import { ColorSchemeName } from "react-native";
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
+import WelcomeScreen from "../screens/WelcomeScreen";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
@@ -41,6 +42,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}

@@ -10,6 +10,7 @@ export default {
     tint: tintColorLight,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
+    btnBorder : "rgb(0,0,255)",
   },
   dark: {
     text: "#000",
@@ -18,6 +19,7 @@ export default {
     tint: tintColorLight,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
+    btnBorder : "white",
   },
 };
 

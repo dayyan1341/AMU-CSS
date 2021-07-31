@@ -4,7 +4,12 @@
  */
 
 import * as React from "react";
-import { Text as DefaultText, View as DefaultView } from "react-native";
+import {
+  Pressable,
+  Text as DefaultText,
+  View as DefaultView,
+} from "react-native";
+import { color } from "react-native-reanimated";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -29,6 +34,7 @@ type ThemeProps = {
 };
 
 export type TextProps = ThemeProps & DefaultText["props"];
+export type ButtonProps = ThemeProps & Pressable["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
 
 export function Text(props: TextProps) {
@@ -56,4 +62,26 @@ export function Card(props: ViewProps) {
   );
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
+}
+
+export function Button(props: ButtonProps) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const borderColor = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    "btnBorder"
+  );
+
+  return (
+    <Pressable
+      android_ripple={{ color: "#eee" }}
+      style={[
+        { borderColor },
+        {
+          borderWidth: 2,
+        },
+        style,
+      ]}
+      {...otherProps}
+    />
+  );
 }

@@ -13,19 +13,6 @@ Node version:
 Platform: 
   linux x64
 
-Trace: 
-  Error: https://registry.yarnpkg.com/eas-build: Not found
-      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/share/yarn/lib/cli.js:140749:22)
-      at Request.emit (events.js:375:28)
-      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141721:10)
-      at Request.emit (events.js:375:28)
-      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141643:12)
-      at Object.onceWrapper (events.js:481:28)
-      at IncomingMessage.emit (events.js:387:35)
-      at endReadableNT (internal/streams/readable.js:1317:12)
-      at processTicksAndRejections (internal/process/task_queues.js:82:21)
-
 npm manifest: 
   {
     "main": "node_modules/expo/AppEntry.js",

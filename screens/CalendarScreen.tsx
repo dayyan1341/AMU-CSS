@@ -2,18 +2,17 @@ import * as React from "react";
 import { Dimensions, StyleSheet, useWindowDimensions } from "react-native";
 
 import { Text, View } from "../components/Themed";
-import { Agenda, Calendar } from "react-native-calendars";
+// import { Agenda, Calendar } from "react-native-calendars";
 
 const { width, height } = Dimensions.get("window");
 
 export default function CalendarScreen() {
   return (
     <View style={styles.container}>
-      <Calendar
+      {/* <Calendar
         minDate={2020}
         displayLoadingIndicator={true}
         onDayPress={(day) => {
-          console.log(day);
         }}
         // Specify style for calendar container element. Default = {}
         style={{
@@ -50,7 +49,7 @@ export default function CalendarScreen() {
           textMonthFontSize: 16,
           textDayHeaderFontSize: 16,
         }}
-      />
+      /> */}
 
       <View
         style={styles.separator}

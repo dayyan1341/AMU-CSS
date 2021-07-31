@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { HeaderTitle } from "@react-navigation/stack";
 import axios from "axios";
 import * as React from "react";
@@ -7,17 +8,16 @@ import {
   useWindowDimensions,
   FlatList,
   Linking,
-  Button,
-  Pressable,
+  Pressable as TouchableOPacity,
+  TouchableOpacity,
 } from "react-native";
-import { withRepeat } from "react-native-reanimated";
 
 import { Text, View, Card } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { Notices } from "../types";
 
 export default function NoticesScreen() {
-  const window = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
 
   const [noticeData, setNoticeData] = React.useState<Notices>();
   const [refreshState, setRefreshState] = React.useState(false);
@@ -32,24 +32,62 @@ export default function NoticesScreen() {
       })
       .then((res) => {
         setNoticeData(res.data.data);
-        // setRefreshState(false);
+        setRefreshState(false);
         // setPage(page + 1);
       })
       .catch((err) => console.log(err));
   };
 
-  React.useEffect(fetchData, []);
+  const backArrowHandler = () => {
+    if (page > 2) setPage(page - 1);
+  };
+
+  const forwardArrowHandler = () => {
+    setPage(page + 1);
+    setRefreshState(true);
+  };
+
+  React.useEffect(fetchData, [page]);
 
   //https://adminbeta.amu.ac.in/storage/{item.file}
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Notices</Text>
+      <View
+        style={{
+          height: height / 18,
+          width,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: 20,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            if (page > 1) {
+              setPage(page - 1);
+              setRefreshState(true);
+            } else {
+              alert("No going back from here!");
+            }
+          }}
+        >
+          <Ionicons name={"md-arrow-back"} size={24} />
+          <Text>Prev</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.title}>Notices</Text>
+
+        <TouchableOpacity onPress={forwardArrowHandler}>
+          <Ionicons name={"md-arrow-forward"} size={24} />
+          <Text>Next</Text>
+        </TouchableOpacity>
+      </View>
 
       <FlatList
         data={noticeData?.data}
         keyExtractor={(title) => title.id.toString()}
         showsVerticalScrollIndicator={false}
-        bounces
         refreshing={refreshState}
         onRefresh={() => {
           fetchData();
@@ -57,7 +95,7 @@ export default function NoticesScreen() {
         renderItem={({ item, index }) => (
           <Card key={index} style={styles.renderView}>
             <Text style={styles.renderText}>{item.title}</Text>
-            <Pressable
+            <TouchableOPacity
               android_ripple={{ color: "#eee" }}
               style={styles.renderButton}
               onPress={() =>
@@ -69,7 +107,7 @@ export default function NoticesScreen() {
               <Text style={{ color: "white", textAlign: "center" }}>
                 OPEN PDF
               </Text>
-            </Pressable>
+            </TouchableOPacity>
           </Card>
         )}
       />

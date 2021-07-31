@@ -22,6 +22,7 @@ export default function EventsScreen() {
       <FlatList
         data={eventData}
         keyExtractor={(item) => item.file}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
           <Card key={index} style={styles.renderView}>
             <Text style={styles.renderText}>{item.title}</Text>
